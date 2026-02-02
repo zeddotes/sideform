@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Env (untracked – use .env.example as template)
+.env
+.env.local
+.env.*.local
+**/.env
+!**/.env.example
+!**/example.env
+
+# Build
+dist/
+.output/
+.vinxi/
+.turbo/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Test
+coverage/
+.nyc_output/
+
+# CDK
+infra/cdk.out/
+infra/*.js
+infra/*.d.ts
+!infra/jest.config.js
+
+# Prisma
+*.db
+*.db-journal
