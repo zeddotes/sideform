@@ -20,6 +20,7 @@ import { Route as AuthenticatedMeetingsIndexRouteImport } from './routes/_authen
 import { Route as AuthenticatedMeetingTypesIndexRouteImport } from './routes/_authenticated/meeting-types/index'
 import { Route as AuthenticatedMeetingsNewRouteImport } from './routes/_authenticated/meetings/new'
 import { Route as AuthenticatedMeetingTypesNewRouteImport } from './routes/_authenticated/meeting-types/new'
+import { Route as AuthenticatedMeetingTypesMeetingTypeIdPreviewRouteImport } from './routes/_authenticated/meeting-types/$meetingTypeId/preview'
 import { Route as AuthenticatedMeetingTypesMeetingTypeIdEditRouteImport } from './routes/_authenticated/meeting-types/$meetingTypeId/edit'
 
 const SignupRoute = SignupRouteImport.update({
@@ -80,6 +81,12 @@ const AuthenticatedMeetingTypesNewRoute =
     path: '/meeting-types/new',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute =
+  AuthenticatedMeetingTypesMeetingTypeIdPreviewRouteImport.update({
+    id: '/meeting-types/$meetingTypeId/preview',
+    path: '/meeting-types/$meetingTypeId/preview',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedMeetingTypesMeetingTypeIdEditRoute =
   AuthenticatedMeetingTypesMeetingTypeIdEditRouteImport.update({
     id: '/meeting-types/$meetingTypeId/edit',
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/meeting-types/': typeof AuthenticatedMeetingTypesIndexRoute
   '/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/meeting-types/$meetingTypeId/edit': typeof AuthenticatedMeetingTypesMeetingTypeIdEditRoute
+  '/meeting-types/$meetingTypeId/preview': typeof AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -112,6 +120,7 @@ export interface FileRoutesByTo {
   '/meeting-types': typeof AuthenticatedMeetingTypesIndexRoute
   '/meetings': typeof AuthenticatedMeetingsIndexRoute
   '/meeting-types/$meetingTypeId/edit': typeof AuthenticatedMeetingTypesMeetingTypeIdEditRoute
+  '/meeting-types/$meetingTypeId/preview': typeof AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -127,6 +136,7 @@ export interface FileRoutesById {
   '/_authenticated/meeting-types/': typeof AuthenticatedMeetingTypesIndexRoute
   '/_authenticated/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/_authenticated/meeting-types/$meetingTypeId/edit': typeof AuthenticatedMeetingTypesMeetingTypeIdEditRoute
+  '/_authenticated/meeting-types/$meetingTypeId/preview': typeof AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/meeting-types/'
     | '/meetings/'
     | '/meeting-types/$meetingTypeId/edit'
+    | '/meeting-types/$meetingTypeId/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/meeting-types'
     | '/meetings'
     | '/meeting-types/$meetingTypeId/edit'
+    | '/meeting-types/$meetingTypeId/preview'
   id:
     | '__root__'
     | '/'
@@ -169,6 +181,7 @@ export interface FileRouteTypes {
     | '/_authenticated/meeting-types/'
     | '/_authenticated/meetings/'
     | '/_authenticated/meeting-types/$meetingTypeId/edit'
+    | '/_authenticated/meeting-types/$meetingTypeId/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMeetingTypesNewRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/meeting-types/$meetingTypeId/preview': {
+      id: '/_authenticated/meeting-types/$meetingTypeId/preview'
+      path: '/meeting-types/$meetingTypeId/preview'
+      fullPath: '/meeting-types/$meetingTypeId/preview'
+      preLoaderRoute: typeof AuthenticatedMeetingTypesMeetingTypeIdPreviewRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/meeting-types/$meetingTypeId/edit': {
       id: '/_authenticated/meeting-types/$meetingTypeId/edit'
       path: '/meeting-types/$meetingTypeId/edit'
@@ -276,6 +296,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedMeetingTypesIndexRoute: typeof AuthenticatedMeetingTypesIndexRoute
   AuthenticatedMeetingsIndexRoute: typeof AuthenticatedMeetingsIndexRoute
   AuthenticatedMeetingTypesMeetingTypeIdEditRoute: typeof AuthenticatedMeetingTypesMeetingTypeIdEditRoute
+  AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute: typeof AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -286,6 +307,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedMeetingsIndexRoute: AuthenticatedMeetingsIndexRoute,
   AuthenticatedMeetingTypesMeetingTypeIdEditRoute:
     AuthenticatedMeetingTypesMeetingTypeIdEditRoute,
+  AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute:
+    AuthenticatedMeetingTypesMeetingTypeIdPreviewRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

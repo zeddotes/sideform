@@ -242,12 +242,21 @@ function EditMeetingTypePage() {
         Edit meeting type
       </h1>
       <p className="text-zinc-600 mb-6">Update sections and fields.</p>
-      <Link
-        to="/meeting-types"
-        className="inline-flex items-center px-4 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100 mb-6"
-      >
-        Back to meeting types
-      </Link>
+      <div className="flex items-center gap-2 mb-6">
+        <Link
+          to="/meeting-types"
+          className="inline-flex items-center px-4 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100"
+        >
+          Back to meeting types
+        </Link>
+        <Link
+          to="/meeting-types/$meetingTypeId/preview"
+          params={{ meetingTypeId }}
+          className="inline-flex items-center px-4 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100"
+        >
+          Preview
+        </Link>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
         <div>
           <label

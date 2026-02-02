@@ -1,8 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { listMeetingTypesFn } from "@/server/meetingTypes";
 
+type MeetingTypeListItem = Awaited<ReturnType<typeof listMeetingTypesFn>>[number];
+
 export const Route = createFileRoute("/_authenticated/meeting-types/")({
-  loader: async () => {
+  loader: async (): Promise<MeetingTypeListItem[]> => {
     return listMeetingTypesFn();
   },
   component: MeetingTypesPage,
@@ -39,18 +41,27 @@ function MeetingTypesPage() {
                   <p className="text-sm text-zinc-600 mt-1">{mt.description}</p>
                 )}
               </div>
-              <button
-                type="button"
-                onClick={() =>
-                  navigate({
-                    to: "/meeting-types/$meetingTypeId/edit",
-                    params: { meetingTypeId: mt.id },
-                  })
-                }
-                className="px-4 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100 text-sm font-medium text-zinc-700"
-              >
-                Edit
-              </button>
+              <div className="flex items-center gap-2">
+                <Link
+                  to="/meeting-types/$meetingTypeId/preview"
+                  params={{ meetingTypeId: mt.id }}
+                  className="px-4 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100 text-sm font-medium text-zinc-700"
+                >
+                  Preview
+                </Link>
+                <button
+                  type="button"
+                  onClick={() =>
+                    navigate({
+                      to: "/meeting-types/$meetingTypeId/edit",
+                      params: { meetingTypeId: mt.id },
+                    })
+                  }
+                  className="px-4 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100 text-sm font-medium text-zinc-700"
+                >
+                  Edit
+                </button>
+              </div>
             </li>
           ))}
         </ul>
